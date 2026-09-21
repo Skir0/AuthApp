@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 30px 15px;
+  color: #222;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.intro {
+  margin-bottom: 25px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.intro-text {
+  margin: 0;
+  color: #666;
+}
+
+.card {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  color: #222;
+  background: #eee;
+  cursor: pointer;
+}
+
+.tab.is-active {
+  color: #fff;
+  background: #555;
+}
+
+.auth-form,
+.form-row {
+  display: grid;
+  gap: 12px;
+}
+
+.form-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  color: #222;
+  background: #fff;
+}
+
+input:focus {
+  outline: 1px solid #555;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 9px 12px;
+  border: 1px solid #888;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.primary-button {
+  color: #fff;
+  background: #555;
+}
+
+.secondary-button {
+  color: #222;
+  background: #eee;
+}
+
+.notice {
+  min-height: 18px;
+  margin-bottom: 10px;
+  color: #176b32;
+  font-size: 14px;
+}
+
+.notice:empty {
+  margin-bottom: 0;
+}
+
+.notice.error {
+  color: #a00000;
+}
+
+.profile {
+  display: grid;
+  gap: 8px;
+}
+
+.profile-label,
+.profile-name,
+.profile-email {
+  margin: 0;
+}
+
+.profile-label,
+.profile-email {
+  color: #666;
+  font-size: 14px;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.text-button {
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  color: #333;
+  background: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

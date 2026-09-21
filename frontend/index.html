@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuthApp</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1>AuthApp</h1>
+      <p class="intro-text">Войдите или зарегистрируйтесь.</p>
+    </section>
+
+    <section class="card">
+      <div class="tabs" role="tablist" aria-label="Авторизация">
+        <button class="tab is-active" type="button" data-tab="login">Войти</button>
+        <button class="tab" type="button" data-tab="register">Регистрация</button>
+      </div>
+
+      <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+      <form id="login-form" class="auth-form">
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" placeholder="Введите пароль" autocomplete="current-password" required>
+        </label>
+        <button class="primary-button" type="submit">Войти</button>
+      </form>
+
+      <form id="register-form" class="auth-form is-hidden">
+        <div class="form-row">
+          <label>
+            Имя
+            <input type="text" name="first_name" placeholder="Иван" autocomplete="given-name" required minlength="3">
+          </label>
+          <label>
+            Фамилия
+            <input type="text" name="last_name" placeholder="Иванов" autocomplete="family-name" required minlength="3">
+          </label>
+        </div>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" placeholder="Минимум 5 символов" autocomplete="new-password" required minlength="5">
+        </label>
+        <button class="primary-button" type="submit">Создать аккаунт</button>
+      </form>
+
+      <div id="profile" class="profile is-hidden">
+        <div class="profile-icon">✓</div>
+        <div>
+          <p class="profile-label">Вы вошли как</p>
+          <p id="profile-name" class="profile-name">Пользователь</p>
+          <p id="profile-email" class="profile-email"></p>
+        </div>
+        <button id="logout-button" class="secondary-button" type="button">Выйти</button>
+      </div>
+
+      <button id="check-profile" class="text-button" type="button">Проверить текущую сессию</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
