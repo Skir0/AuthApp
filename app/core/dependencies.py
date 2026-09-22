@@ -1,4 +1,4 @@
-from fastapi import Request, HTTPException, status, Depends
+from fastapi import Depends, HTTPException, Request, status
 from jose import jwt, JWTError
 from datetime import datetime, timezone
 from app.core.config import get_auth_data
@@ -6,9 +6,18 @@ from app.db.dao import UsersDAO
 
 
 def get_token(request: Request):
-    token = request.cookies.get('users_access_token')
+    token = request.cookies.get("users_access_token")
     if not token:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Токен не найден')
+        authorization = request.headers.get("Authorization", "")
+        if authorization.startswith("Bearer "):
+            token = authorization.removeprefix("Bearer ").strip()
+
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Токен не найден",
+        )
+
     return token
 
 

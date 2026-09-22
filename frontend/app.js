@@ -8,6 +8,7 @@ const forms = {
 const notice = document.querySelector("#notice");
 const profile = document.querySelector("#profile");
 const checkProfileButton = document.querySelector("#check-profile");
+let accessToken = sessionStorage.getItem("access_token");
 
 function showNotice(message, isError = false) {
   notice.textContent = message;
@@ -26,13 +27,18 @@ function formDataToObject(form) {
 }
 
 async function request(path, options = {}) {
+  const headers = {
+    "Content-Type": "application/json",
+    ...(options.headers || {}),
+  };
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   const response = await fetch(`${API_BASE}${path}`, {
     ...options,
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
+    headers,
   });
 
   const body = await response.json().catch(() => ({}));
@@ -59,13 +65,15 @@ forms.login.addEventListener("submit", async (event) => {
   event.preventDefault();
   showNotice("Выполняется вход...");
   try {
-    await request("/auth/login/", {
+    const loginResult = await request("/auth/login/", {
       method: "POST",
       body: JSON.stringify(formDataToObject(forms.login)),
     });
+    accessToken = loginResult.access_token;
+    sessionStorage.setItem("access_token", accessToken);
     const user = await request("/auth/me/");
     showProfile(user);
-    showNotice("Вы успешно вошли.");
+    showNotice("Вы успешно вошли и вас взломали. За ваш счет куплено 42 верблюда");
   } catch (error) {
     showNotice(error.message, true);
   }
@@ -100,6 +108,8 @@ checkProfileButton.addEventListener("click", async () => {
 document.querySelector("#logout-button").addEventListener("click", async () => {
   try {
     await request("/auth/logout/", { method: "POST" });
+    accessToken = null;
+    sessionStorage.removeItem("access_token");
     profile.classList.add("is-hidden");
     setActiveTab("login");
     showNotice("Вы вышли из аккаунта.");
